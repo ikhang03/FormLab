@@ -71,7 +71,7 @@
             If you have a moment, we'd appreciate it if you would fill out this survey.
         </div>
         
-        <form action="processForm.html" method="post">
+        <form id="surveyForm">
             <div class="form-section">
                 <div class="section-title">Your information:</div>
                 
@@ -143,5 +143,16 @@
             <input type="submit" value="Submit" class="submit-btn">
         </form>
     </div>
+
+    <script>
+        document.getElementById('surveyForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission
+            // Optionally, you can log the form data to the console for debugging
+            const formData = new FormData(this);
+            console.log('Form Data:', Object.fromEntries(formData));
+            // Redirect to thankYou.html
+            window.location.href = 'thankYou.html';
+        });
+    </script>
 </body>
 </html>
