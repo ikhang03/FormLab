@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frontend Developer Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --background-color: #fff;
+            --text-color: #333;
+            --border-color: #000;
+            --link-color: #0066cc;
+            --subtitle-color: #666;
+            --logo-bg: #333; 
+            --logo-text-color: #333;
+            --review-border: #000;
+            --reviewer-color: #666;
+            --toggle-bg: #333;
+            --toggle-text: #fff;
+        }
+
+        [data-theme="dark"] {
+            --background-color: #1a1a1a;
+            --text-color: #e0e0e0;
+            --border-color: #444;
+            --link-color: #4da8ff;
+            --subtitle-color: #999;
+            --logo-bg: #ddd; 
+            --logo-text-color: #e0e0e0;
+            --review-border: #444;
+            --reviewer-color: #999;
+            --toggle-bg: #ddd;
+            --toggle-text: #1a1a1a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--link-color);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            border: 1px solid var(--border-color);
+        }
+
+        header {
+            padding: 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .logo {
+            width: 25px;
+            height: 25px;
+            background-color: var(--logo-bg);
+            margin-right: 10px;
+            border-radius: 50%;
+            transition: background-color 0.3s ease; 
+        }
+
+        .logo-text {
+            font-weight: normal;
+            color: var(--logo-text-color);
+            transition: color 0.3s ease;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 5px;
+            font-size: 14px;
+        }
+
+        nav li:not(:last-child)::after {
+            content: "/";
+            margin-left: 5px;
+            color: var(--text-color);
+        }
+
+        .hero {
+            text-align: center;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        h1 {
+            font-family: 'Caveat', cursive;
+            font-size: 2rem;
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            font-size: 0.9rem;
+            color: var(--subtitle-color);
+        }
+
+        .section {
+            padding: 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .section-title {
+            font-family: 'Caveat', cursive;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .project-list {
+            margin-left: -15px;
+            margin-right: -15px;
+        }
+
+        .project-item {
+            padding: 8px 15px;
+            border-bottom: 1px solid var(--border-color);
+            text-align: left;
+        }
+
+        .project-item:last-child {
+            border-bottom: none;
+        }
+
+        .work-experience-list {
+            margin-left: -15px;
+            margin-right: -15px;
+        }
+
+        .work-experience-item {
+            padding: 0 15px;
+        }
+
+        .work-experience-item:not(:last-child) {
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+        }
+
+        .job-title {
+            font-weight: bold;
+        }
+
+        .job-description {
+            margin: 5px 0;
+        }
+
+        .profile-link {
+            color: var(--link-color);
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .education-details {
+            margin-bottom: 15px;
+        }
+
+        .courses-title {
+            margin: 10px 0 5px 0;
+        }
+
+        .courses-list li {
+            line-height: 1.4;
+        }
+
+        .courses-list li::before {
+            content: "- ";
+        }
+
+        .reviews-section {
+            border-bottom: none;
+        }
+
+        .review {
+            border: 1px solid var(--review-border);
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .reviewer-info {
+            font-size: 0.8rem;
+            color: var(--reviewer-color);
+            margin-top: 10px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px 0;
+            font-size: 0.8rem;
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            padding: 5px 10px;
+            cursor: pointer;
+            background-color: var(--toggle-bg);
+            color: var(--toggle-text);
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        @media (min-width: 769px) {
+            header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .logo-container {
+                margin-bottom: 0;
+            }
+
+            .content-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .section {
+                border-right: 1px solid var(--border-color);
+                border-bottom: 1px solid var(--border-color);
+                height: 100%;
+            }
+
+            .section:nth-child(3n) {
+                border-right: none;
+            }
+
+            .reviews-section {
+                grid-column: 1 / -1;
+                border-bottom: none;
+            }
+
+            .project-item {
+                text-align: left;
+            }
+
+            .reviews-container {
+                display: flex;
+                gap: 15px;
+            }
+
+            .review {
+                flex: 1;
+                margin-bottom: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="theme-toggle" onclick="toggleTheme()">Dark Mode</button>
+    <div class="container">
+        <header>
+            <div class="logo-container">
+                <div class="logo"></div>
+                <span class="logo-text">Ngo I Khang</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Projects</a></li>
+                    <li><a href="#">Articles</a></li>
+                    <li><a href="form_1.html">Contact</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <div class="hero">
+            <h1>Frontend Developer</h1>
+            <p class="subtitle">html only with proper layout, no styling</p>
+        </div>
+
+        <div class="content-grid">
+            <div class="section">
+                <h2 class="section-title">Projects</h2>
+                <div class="project-list">
+                    <div class="project-item">HTML ONLY PORTFOLIO</div>
+                    <div class="project-item">Calculator</div>
+                    <div class="project-item">Quiz App</div>
+                    <div class="project-item">Countdown Timer</div>
+                    <div class="project-item">Product Upcoming Page</div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Work Experience</h2>
+                <div class="work-experience-list">
+                    <div class="work-experience-item">
+                        <p class="job-title">Frontend.sh</p>
+                        <p class="job-description">Solved all the frontend projects</p>
+                        <a href="#" class="profile-link">Visit my Profile</a>
+                    </div>
+                    <div class="work-experience-item">
+                        <p class="job-title">OpenSource Work</p>
+                        <p class="job-description">Contributed to 50 opensource projects. Made my own projects with 200 GitHub Stars.</p>
+                        <a href="#" class="profile-link">Visit my GitHub Profile</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Education</h2>
+                <div class="education-details">
+                    <p>Graduated with 3.76 out of 4 CGPA. Won Acme Hackathon. Organized 30 sessions.</p>
+                </div>
+                <p class="courses-title">Courses I took:</p>
+                <ul class="courses-list">
+                    <li>Object Oriented Programming</li>
+                    <li>Data Structures and Algorithms</li>
+                    <li>Web Engineering</li>
+                    <li>Artificial Intelligence</li>
+                    <li>Human Computer Interaction</li>
+                    <li>Computer Graphics</li>
+                    <li>Database Management Systems</li>
+                    <li>Distributed Database Systems</li>
+                    <li>Discreet Mathematics</li>
+                </ul>
+            </div>
+
+            <div class="section reviews-section">
+                <h2 class="section-title">Reviews From my Teachers</h2>
+                <div class="reviews-container">
+                    <div class="review">
+                        <p>John doe was a brilliant student, always stood out with his assignments.</p>
+                        <p class="reviewer-info">Jane Doe<br>Assistant Professor</p>
+                    </div>
+                    <div class="review">
+                        <p>John doe was a brilliant student, always stood out with his assignments.</p>
+                        <p class="reviewer-info">Jane Doe<br>Assistant Professor</p>
+                    </div>
+                    <div class="review">
+                        <p>John doe was a brilliant student, always stood out with his assignments.</p>
+                        <p class="reviewer-info">Jane Doe<br>Assistant Professor</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            © all rights reserved 2025
+        </footer>
+    </div>
+
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            if (body.getAttribute('data-theme') === 'dark') {
+                body.removeAttribute('data-theme');
+            } else {
+                body.setAttribute('data-theme', 'dark');
+            }
+        }
+    </script>
+</body>
+</html>
